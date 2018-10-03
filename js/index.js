@@ -1,7 +1,7 @@
 // your code here
 function displayCommits() {
     let commits = JSON.parse(this.responseText)
-    let commitsList = `<ul>${commits.map(commit => 
+    let commitsList = `<ul>${commits.map(commit =>
         '<li>' + commit.commit.author.name + ' - ' + commit.author.login + ' - ' + commit.commit.message + '</li>').join('')}</ul>`
 
     document.getElementById('details').innerHTML = commitsList
