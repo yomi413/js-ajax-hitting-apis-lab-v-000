@@ -1,43 +1,41 @@
 // your code here
-
 function displayCommits() {
-  const commits = JSON.parse(this.responseText)
-  const commitsList = `<ul>${commits.map(r => '<li>'  + r.commit.author.name + ' - ' + r.author.login + ' - ' + r.commit.message).join('') + '</li>'}</ul>`
+  let commits = JSON.parse(this.responseText)
+  let commitsList = `<ul>${commits.map(commit =>
+      '<li>' + commit.commit.author.name + ' - ' + commit.author.login + ' - ' + commit.commit.message + '</li>').join('')}</ul>`
 
   document.getElementById('details').innerHTML = commitsList
 }
 
 function displayBranches() {
-  const branches = JSON.parse(this.responseText)
-  const branchList = `<ul>${branches.map(branch => '<li>' + branch.name) + '</li>'}</ul>`
+  let branches = JSON.parse(this.responseText)
+  let branchesList = `<ul>${branches.map(branch =>
+      '<li>' + branch.name + '</li>').join('')}</ul>`
 
-  document.getElementById('details').innerHTML = branchList
+  document.getElementById('details').innerHTML = branchesList
 }
 
 function displayRepositories() {
-  const repos = JSON.parse(this.responseText)
-  const repoList = `<ul>${repos.map(r => '<li>' + 'https://github.com' + '/' + r.full_name).join('') + '</li>'}</ul>`
-
-  document.getElementById('repositories').innerHTML = repoList
+  let repos = JSON.parse(this.responseText)
+  let reposList = `<ul>${repos.map(repo =>
+      '<li>' + repo.full_name + ' - ' + repo.html_url + '</li>').join('')}</ul>`
+  document.getElementById('repositories').innerHTML = reposList
 }
 
 function getRepositories() {
-  const req = new XMLHttpRequest();
-  req.addEventListener('load', displayRepositories)
+  let req = new XMLHttpRequest()
   req.open('GET', 'https://api.github.com/users/octocat/repos')
   req.send()
 }
 
 function getCommits() {
-  const req = new XMLHttpRequest();
-  req.addEventListener('load', displayCommits)
+  let req = new XMLHttpRequest()
   req.open('GET', 'https://api.github.com/repos/octocat/Spoon-Knife/commits')
   req.send()
 }
 
 function getBranches() {
-  const req = new XMLHttpRequest();
-  req.addEventListener('load', displayBranches)
+  let req = new XMLHttpRequest()
   req.open('GET', 'https://api.github.com/repos/octocat/Spoon-Knife/branches')
   req.send()
 }
